@@ -41,7 +41,7 @@ public class Application extends SpringBootServletInitializer {
         @Override
         public void configure() {
             restConfiguration()
-                .contextPath("/local-rest").apiContextPath("/api-doc")
+                .contextPath("/camel-rest-jpa").apiContextPath("/api-doc")
                     .apiProperty("api.title", "CallHistory REST API")
                     .apiProperty("api.version", "1.0")
                     .apiProperty("cors", "true")
