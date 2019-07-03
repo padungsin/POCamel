@@ -1,4 +1,4 @@
-package com.popo.camel.gw.model.log;
+package com.popo.camel.callhistory;
 
 import java.util.Date;
 
