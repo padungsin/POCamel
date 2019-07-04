@@ -16,14 +16,11 @@
  */
 package com.popo.camel.callhistory;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
@@ -35,44 +32,7 @@ public class Application extends SpringBootServletInitializer {
         SpringApplication.run(Application.class, args);
     }
     
-    @Component
-    class RestApi extends RouteBuilder {
 
-        @Override
-        public void configure() {
-            restConfiguration()
-                .contextPath("/camel-rest-jpa").apiContextPath("/api-doc")
-                    .apiProperty("api.title", "CallHistory REST API")
-                    .apiProperty("api.version", "1.0")
-                    .apiProperty("cors", "true")
-                    .apiContextRouteId("doc-api")
-                    .port(env.getProperty("server.port", "8086"))
-                .bindingMode(RestBindingMode.json);
-            
-            
-            rest("/say")
-            .get("/hello").to("direct:hello")
-            .get("/bye").consumes("application/json").to("direct:bye")
-            .post("/bye").to("mock:update");
-
-            from("direct:hello")
-            	.transform().constant("Hello World");
-            from("direct:bye")
-            	.transform().constant("Bye World");
-
-//            rest("/callHistory").description("CallHistory REST service")
-//                .get("/").description("The list of all the books")
-//                    .route().routeId("books-api")
-//                    .bean(Database.class, "findBooks")
-//                    .endRest()
-//                .post("/").description("Save CallHistory")
-//                    .route().routeId("callhistory-api")
-//                    .bean(Database.class, "saveCallHistory")
-//                .get("order/{id}").description("Details of an order by id")
-//                    .route().routeId("order-api")
-//                    .bean(Database.class, "findOrder(${header.id})");
-        }
-    }
 /*
     @Component
     class Backend extends RouteBuilder {
