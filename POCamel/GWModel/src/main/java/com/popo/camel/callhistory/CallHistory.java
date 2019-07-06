@@ -8,23 +8,45 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PROCESS_HISTORY")
+@Table(name = "CALL_HISTORY")
 public class CallHistory {
 
     @Id
     @GeneratedValue
-    private int id;
-	private String appId;
+    private long id;
+    private long ref;
+	private String serviceType;
+    private int seq;
+    private String appId;
 	private String countryCode;
 	private String request;
 	private String response;
 	private String status;
+	private String description;
 	private Date processDate;
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+	public long getRef() {
+		return ref;
+	}
+	public void setRef(long ref) {
+		this.ref = ref;
+	}
+	public String getServiceType() {
+		return serviceType;
+	}
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 	public String getAppId() {
 		return appId;
@@ -56,12 +78,19 @@ public class CallHistory {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public Date getProcessDate() {
 		return processDate;
 	}
 	public void setProcessDate(Date processDate) {
 		this.processDate = processDate;
 	}
+
 	
 	
 }

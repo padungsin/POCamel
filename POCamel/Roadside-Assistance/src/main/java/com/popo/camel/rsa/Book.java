@@ -14,11 +14,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.popo.camel.callhistory;
+package com.popo.camel.rsa;
 
-import org.springframework.data.repository.CrudRepository;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import com.popo.camel.callhistory.CallHistory;
+@Entity
+@Table(name = "books")
+public class Book {
 
-public interface CallHistoryRepository extends CrudRepository<CallHistory, Integer> {
+    @Id
+    @GeneratedValue
+    private int id;
+
+    private String item;
+
+    private String description;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

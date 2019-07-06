@@ -14,25 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.popo.camel.callhistory;
+package com.popo.camel.rsa;
 
-import java.util.Random;
+import org.springframework.data.repository.CrudRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-@Component
-public class OrderService {
-
-    @Autowired
-    private BookRepository books;
-
-    private final Random amount = new Random();
-
-    public Order generateOrder() {
-        Order order = new Order();
-        order.setAmount(amount.nextInt(10) + 1);
-        order.setBook(books.findById(amount.nextInt(2) + 1).get());
-        return order;
-    }
+public interface BookRepository extends CrudRepository<Book, Integer> {
 }

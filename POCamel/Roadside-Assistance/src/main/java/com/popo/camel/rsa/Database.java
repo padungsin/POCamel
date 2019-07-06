@@ -14,9 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.popo.camel.callhistory;
+package com.popo.camel.rsa;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public interface OrderRepository extends CrudRepository<Order, Integer> {
+import com.popo.camel.callhistory.CallHistory;
+
+@Component
+public class Database {
+
+    @Autowired
+    BookRepository books;
+
+    @Autowired
+    OrderRepository orders;
+    
+    @Autowired
+    CallHistoryRepository callHistoryRepository;
+    
+
+    public Iterable<Book> findBooks() {
+        return books.findAll();
+    }
+
+    public Order findOrder(Integer id) {
+        return orders.findById(id).get();
+    }
+    
+    public CallHistory saveCallHistory(CallHistory callHistory){
+    	return callHistoryRepository.save(callHistory);
+    	
+    }
 }

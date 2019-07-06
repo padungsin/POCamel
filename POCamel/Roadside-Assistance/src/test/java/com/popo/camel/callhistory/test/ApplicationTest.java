@@ -35,7 +35,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
+import com.popo.camel.rsa.Book;
+import com.popo.camel.rsa.Order;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -46,11 +47,9 @@ public class ApplicationTest {
 
     @Autowired
     private CamelContext camelContext;
-    /*
+
     @Test
     public void newOrderTest() {
-    	
-    	
         // Wait for maximum 5s until the first order gets inserted and processed
         NotifyBuilder notify = new NotifyBuilder(camelContext)
             .fromRoute("generate-order")
@@ -70,7 +69,6 @@ public class ApplicationTest {
         assertThat(order.getBook().getItem()).isIn("Camel", "ActiveMQ");
         assertThat(order.getBook().getDescription()).isIn("Camel in Action", "ActiveMQ in Action");
         assertThat(order.isProcessed()).isTrue();
-        
     }
 
     @Test
@@ -88,5 +86,4 @@ public class ApplicationTest {
             .hasFieldOrPropertyWithValue("item", "ActiveMQ")
             .hasFieldOrPropertyWithValue("description", "ActiveMQ in Action");
     }
-    */
 }

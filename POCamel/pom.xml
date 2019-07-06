@@ -8,7 +8,12 @@
 
 	<modules>
 		<module>GWModel</module>
+		<module>CISL_RSA</module>
 		<module>CallHistory</module>
+		<module>RSA_AssistanceCases</module>
+		
+
+		
 	</modules>
 
     <properties>

@@ -23,7 +23,7 @@ camel:
   component:
     servlet:
       mapping:
-        contextPath: /gateway-internal-service/*
+        contextPath: /camel-rest-jpa/*
 server:
   port: 8086
 mysql:

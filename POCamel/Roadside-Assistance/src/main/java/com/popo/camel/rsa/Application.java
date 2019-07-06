@@ -14,15 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.popo.camel.callhistory;
+package com.popo.camel.rsa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
-
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
