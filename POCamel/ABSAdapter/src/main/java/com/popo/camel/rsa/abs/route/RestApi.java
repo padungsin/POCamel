@@ -1,4 +1,4 @@
-package com.popo.camel.callhistory.route;
+package com.popo.camel.rsa.abs.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;

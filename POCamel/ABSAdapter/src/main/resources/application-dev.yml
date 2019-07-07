@@ -19,40 +19,19 @@ camel:
   springboot:
     # The Camel context name
     name: CamelRestJpa
-
+  
   component:
     servlet:
       mapping:
-        contextPath: /Roadsied-Assistance/*
-server:
-  port: 8082
-mysql:
-  service:
-    # The host of the MySQL database server, can be customized using
-    # the 'MYSQL_SERVICE_HOST' env variable
-    host:     localhost
-    # The port of the MySQL database server, can be customized using
-    # the 'MYSQL_SERVICE_PORT' env variable
-    port:     3306
-    # The database to use, can be customized using the 'MYSQL_SERVICE_DATABASE'
-    # env variable
-    database: camel
+        contextPath: /camel-rest-jpa/*
 
 spring:
   # Spring JDBC configuration
   datasource:
-    url:      jdbc:mysql://${mysql.service.host}:${mysql.service.port}/${mysql.service.database}
-    username: camel
-    password: camel
-
-  # Spring Data JPA configuration
-  jpa:
-    hibernate:
-      # To be updated in real production usage!
-      ddl-auto: update
-    show-sql: false
+    # Let Spring Boot auto-configure an embedded HSQL database
+    url:
 
 # The application configuration properties
 example:
-  generateOrderPeriod: 10s
-  processOrderPeriod: 30s
+  generateOrderPeriod: 2s
+  processOrderPeriod: 5s

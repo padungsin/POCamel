@@ -8,12 +8,17 @@
 
 	<modules>
 		<module>GWModel</module>
+
 		<module>CISL_RSA</module>
+		<module>UnityModel</module>
+		
+		
+		<module>GWUtility</module>
 		<module>CallHistory</module>
+		<module>ABSAdapter</module>
 		<module>RSA_AssistanceCases</module>
 		
 
-		
 	</modules>
 
     <properties>

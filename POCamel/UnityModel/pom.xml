@@ -10,7 +10,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>GWModel</artifactId>
+	<artifactId>UnityModel</artifactId>
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
