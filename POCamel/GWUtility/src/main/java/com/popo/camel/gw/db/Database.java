@@ -30,18 +30,25 @@ import com.popo.camel.gw.callhistory.model.RouteConfig;
 import com.popo.camel.gw.repository.CallHistoryRepository;
 import com.popo.camel.gw.repository.GWReferenceRepository;
 import com.popo.camel.gw.repository.RouteConfigRepository;
+import com.popo.camel.gw.repository.TranscodeRepository;
+import com.popo.camel.gw.transcode.model.Transcode;
+import com.popo.camel.gw.transcode.model.Transcode.TranscodeType;
+
 @ComponentScan("com.popo.camel.gw.callhistory.db")
 @Component
 public class Database {
 
 	@Autowired
 	GWReferenceRepository gwReferenceRepository;
-	
-    @Autowired
-    CallHistoryRepository callHistoryRepository;	
-    
-    @Autowired
-    RouteConfigRepository routeConfigRepository;	
+
+	@Autowired
+	CallHistoryRepository callHistoryRepository;
+
+	@Autowired
+	RouteConfigRepository routeConfigRepository;
+
+	@Autowired
+	TranscodeRepository transcodeRepository;
 
 	public String generateSequence() throws ParseException {
 		DecimalFormat df = new DecimalFormat("0000000000");
@@ -56,7 +63,7 @@ public class Database {
 		} else {
 			gwReference = gwReferences.get(0);
 			ref = df.parse(gwReference.getRef()).longValue();
-			ref +=1;
+			ref += 1;
 		}
 		gwReference.setRef(df.format(ref));
 		gwReferenceRepository.save(gwReference);
@@ -64,19 +71,36 @@ public class Database {
 
 	}
 
-    public CallHistory saveCallHistory(CallHistory callHistory){
-    	return callHistoryRepository.save(callHistory);
-    	
-    }
-    
-    public CallHistory getCallHistory(String ref, int seq){
-    	return callHistoryRepository.findByRefAndSeq(ref, seq);
-    	
-    }
-    
-    public RouteConfig getRoute(String appId, String countryCode, String serviceType){
-    	return routeConfigRepository.findByAppIdAndCountryCodeAndServiceType(appId, countryCode, serviceType);
-    	
-    }
+	public CallHistory saveCallHistory(CallHistory callHistory) {
+		return callHistoryRepository.save(callHistory);
 
+	}
+
+	public CallHistory getCallHistory(String ref, int seq) {
+		return callHistoryRepository.findByRefAndSeq(ref, seq);
+
+	}
+
+	public RouteConfig getRoute(String appId, String countryCode, String serviceType) {
+		return routeConfigRepository.findByAppIdAndCountryCodeAndServiceType(appId, countryCode, serviceType);
+
+	}
+
+	public Transcode transcode(TranscodeType transcodeType, String value, String from, String to) {
+		Transcode fromTranscode = transcodeRepository.findByTranscodeTypeAndValueAndPartner(transcodeType, value, from);
+		Transcode toTranscode = transcodeRepository.findByTranscodeTypeAndCanonicalAndPartner(transcodeType, fromTranscode.getCanonical(), to);
+		return toTranscode;
+	}
+
+	public Transcode getTranscodeFromCanonical(TranscodeType transcodeType, String caninocal, String to) {
+
+		Transcode toTranscode = transcodeRepository.findByTranscodeTypeAndCanonicalAndPartner(transcodeType, caninocal, to);
+		return toTranscode;
+	}
+	
+	public Transcode getTranscodeFromPartnerValue(TranscodeType transcodeType, String value, String from) {
+
+		Transcode transcode = transcodeRepository.findByTranscodeTypeAndValueAndPartner(transcodeType, value, from);
+		return transcode;
+	}
 }

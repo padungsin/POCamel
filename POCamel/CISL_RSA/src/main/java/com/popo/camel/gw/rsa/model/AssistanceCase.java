@@ -1,26 +1,15 @@
 package com.popo.camel.gw.rsa.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "ASSISTANCE_CASE")
 public class AssistanceCase {
-	public enum CaseType{XI1, XH1}
 
-    @Id
-    @GeneratedValue
+
+
     private long id;
 	private String caseId;
 	private String policyNumber;
 	private String externalPolicyNumber;
 	
-	@Enumerated(EnumType.STRING)
-	private CaseType caseType;
+	private String caseType;
 	private double lat;
 	private double lng;
 	
@@ -49,10 +38,11 @@ public class AssistanceCase {
 	public void setExternalPolicyNumber(String externalPolicyNumber) {
 		this.externalPolicyNumber = externalPolicyNumber;
 	}
-	public CaseType getCaseType() {
+
+	public String getCaseType() {
 		return caseType;
 	}
-	public void setCaseType(CaseType caseType) {
+	public void setCaseType(String caseType) {
 		this.caseType = caseType;
 	}
 	public double getLat() {

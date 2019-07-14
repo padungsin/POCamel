@@ -15,13 +15,12 @@ public class RestApi extends RouteBuilder {
 			.apiProperty("api.title", "Assistance Case REST API")
 			.apiProperty("api.version", "1.0").apiProperty("cors", "true")
 			.apiContextRouteId("doc-api")
-			.port("8086")
+			.port("9000")
 			.bindingMode(RestBindingMode.json);
 
-		rest("/assistanceCases").consumes("application/json").produces("application/json")
-			.post("/").bindingMode(RestBindingMode.json).to("direct:createAssistanceCase")
-			.get("/{assistanceCaseId}").bindingMode(RestBindingMode.json).to("direct:getAssistanceCase");
+		rest("/policy").consumes("application/json").produces("application/json")
+		.post("/").bindingMode(RestBindingMode.json).to("direct:createPolicy");
+//		.get("/{policyNumber}").bindingMode(RestBindingMode.json).to("direct:getPolicy");
 		
-
 	}
 }

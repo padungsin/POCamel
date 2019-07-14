@@ -23,9 +23,9 @@ camel:
   component:
     servlet:
       mapping:
-        contextPath: /gateway-internal-service/*
+        contextPath: /adapter-abs/*
 server:
-  port: 8081
+  port: 9100
 mysql:
   service:
     # The host of the MySQL database server, can be customized using

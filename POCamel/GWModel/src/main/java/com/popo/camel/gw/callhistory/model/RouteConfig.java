@@ -2,6 +2,7 @@ package com.popo.camel.gw.callhistory.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "ROUTE_CONFIG")
 public class RouteConfig {
 	@Id
-	@GeneratedValue
+	 @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 
 	private String appId;

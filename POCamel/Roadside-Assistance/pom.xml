@@ -115,6 +115,13 @@
 			<version>${camel.bom.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http4</artifactId>
+			<version>${camel.bom.version}</version>
+			<!-- use the same version as your Camel core version -->
+		</dependency>
+
 		<!-- JDBC -->
 		<dependency>
 			<groupId>mysql</groupId>

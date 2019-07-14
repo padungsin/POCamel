@@ -11,11 +11,13 @@
 
 		<module>CISL_RSA</module>
 		<module>UnityModel</module>
+		<module>ABSModel</module>
 		
+		<module>ABSAdapter</module>
 		
 		<module>GWUtility</module>
 		<module>CallHistory</module>
-		<module>ABSAdapter</module>
+		<module>ABSService</module>
 		<module>RSA_AssistanceCases</module>
 		
 

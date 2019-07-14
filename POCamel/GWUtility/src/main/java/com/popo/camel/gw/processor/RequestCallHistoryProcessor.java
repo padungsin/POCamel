@@ -8,6 +8,7 @@ import org.apache.camel.Processor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.popo.camel.gw.callhistory.model.CallHistory;
 import com.popo.camel.gw.db.Database;
 
@@ -26,12 +27,17 @@ public class RequestCallHistoryProcessor implements Processor {
 		callHistory.setApplicationId((String) in.getHeader("applicationId"));
 		callHistory.setCountryCode((String) in.getHeader("countryCode"));
 		callHistory.setServiceType((String) in.getHeader("serviceType"));
+		callHistory.setSubserviceType((String) in.getHeader("subserviceType"));
 		callHistory.setSeq(Integer.parseInt((String) in.getHeader("seq")));
-		callHistory.setRequest(in.getBody().toString());
+		callHistory.setEndpoint((String) in.getHeader("endpoint"));
+
+		System.out.println("request in.getBody().getClass().getName()-->" + in.getBody().getClass().getName());
+		ObjectMapper mapper = new ObjectMapper();
+		callHistory.setRequest(mapper.writeValueAsString(in.getBody()));
 		callHistory.setRequestTime(new Date());
 
 		db.saveCallHistory(callHistory);
-		
+
 	}
 
 }
