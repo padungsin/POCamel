@@ -1,19 +1,30 @@
-package com.popo.camel.gw.adapter.abs.processor;
+package com.popo.camel.gw.processor;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.popo.camel.gw.callhistory.model.RouteConfig;
+import com.popo.camel.gw.db.Database;
+
 @Component
-public class ABSProcessor  implements Processor {
+public class ResultProcessor implements Processor {
+
+
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		Message in = exchange.getIn();
-		in.setHeader(Exchange.HTTP_METHOD, "POST");
-        
-		//in.requ.r .to("http4://localhost:9500/abs-service/policy")
+
 		
+		
+		Message in = exchange.getIn();
+		
+
+		
+		
+
 	}
 
 }

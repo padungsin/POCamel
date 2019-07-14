@@ -6,13 +6,13 @@ import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.popo.camel.gw.adapter.abs.processor.ExceptionProcessor;
 import com.popo.camel.gw.adapter.abs.processor.PolicyABS2CISL;
 import com.popo.camel.gw.adapter.abs.processor.PolicyCISL2ABS;
 import com.popo.camel.gw.processor.NextSequence;
 import com.popo.camel.gw.processor.PreviousSequence;
 import com.popo.camel.gw.processor.RequestCallHistoryProcessor;
 import com.popo.camel.gw.processor.ResponseCallHistoryProcessor;
-import com.popo.camel.gw.rsa.model.Policy;
 @Component
 public class StartRoute extends RouteBuilder {
 
@@ -31,9 +31,19 @@ public class StartRoute extends RouteBuilder {
 	@Autowired
 	private PreviousSequence previousSequence ;
 
+	
+
+	@Autowired
+	private ExceptionProcessor exceptionProcessor;
+	
+	
 	@Override
 	public void configure() throws Exception {
 
+		onException(Exception.class)
+		.handled(true)
+		.process(exceptionProcessor);
+		
 		from("direct:startRoute")
 		.marshal().json(JsonLibrary.Jackson)
 		.unmarshal().json(JsonLibrary.Jackson, com.popo.camel.gw.rsa.model.Policy.class)
@@ -46,10 +56,14 @@ public class StartRoute extends RouteBuilder {
         .setHeader(Exchange.HTTP_METHOD, simple("POST"))
         .setHeader(Exchange.HTTP_PATH, simple("/policyx"))
         .to("http4://localhost:9500/abs-service?bridgeEndpoint=true")
-        .unmarshal().json(JsonLibrary.Jackson, com.popo.camel.gw.abs.model.Policy.class)
+        .unmarshal().json(JsonLibrary.Jackson, com.popo.camel.gw.abs.model.Result.class)
         .process(responseCallHistoryProcessor)
         .process(policyABS2CISL)
         .transform(body());
+		
+	
+	    
+
         
   
 	}

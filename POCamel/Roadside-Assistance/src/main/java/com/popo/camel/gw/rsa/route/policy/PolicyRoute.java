@@ -6,6 +6,7 @@ import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.popo.camel.gw.model.Result;
 import com.popo.camel.gw.processor.GatewayInitialProcessor;
 import com.popo.camel.gw.processor.NextSequence;
 import com.popo.camel.gw.processor.PreviousSequence;
@@ -37,18 +38,17 @@ public class PolicyRoute extends RouteBuilder {
 	public void configure() throws Exception {
 		from("direct:createPolicy")
 		.setHeader("serviceType", constant("RSA.CreatePolicy"))
+		.setHeader("subserviceType", constant("RSA.CreatePolicy"))
 		.process(gatewayInitialProcessor)
 		.marshal().json(JsonLibrary.Jackson)
 		.unmarshal().json(JsonLibrary.Jackson, Policy.class)
 		.process(nextSequence)
 		.process(requestCallHistoryProcessor)
 		.setHeader(Exchange.HTTP_METHOD, simple("POST"))
-		//.setHeader(Exchange.HTTP_PATH, simple("/policy"))
 		.setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
-	    //.to("${header.routeConfig}")
 		.marshal().json(JsonLibrary.Jackson)
 		.toD("http4://${header.routeConfig}?bridgeEndpoint=true")
-	    .unmarshal().json(JsonLibrary.Jackson, Policy.class)
+	    .unmarshal().json(JsonLibrary.Jackson, Result.class)
 	    .process(previousSequence)
 		.process(responseCallHistoryProcessor)
 		.transform(body());

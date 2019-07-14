@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class Policy {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(unique = true)
 	private String absPolicyNumber;
 	private String externalPolicyNumber;
 	private Date startCoverDate;
@@ -33,6 +36,7 @@ public class Policy {
 		this.id = id;
 	}
 
+	
 	public String getAbsPolicyNumber() {
 		return absPolicyNumber;
 	}

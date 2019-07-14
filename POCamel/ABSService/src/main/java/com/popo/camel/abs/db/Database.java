@@ -17,8 +17,10 @@
 package com.popo.camel.abs.db;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
+import com.popo.camel.abs.model.DuplicatePolicyExcetion;
 import com.popo.camel.abs.model.Person;
 import com.popo.camel.abs.model.Person.PersonType;
 import com.popo.camel.abs.model.Policy;
@@ -33,18 +35,21 @@ public class Database {
 	@Autowired
 	AssistanceCaseRepository assistanceCaseRepository;
 
-	public Policy createPolicy(Policy policy) {
+	public Policy createPolicy(Policy policy) throws DuplicatePolicyExcetion{
 
 		
-		policyRepository.save(policy);
-		
-		
-		for (Person person : policy.getParties()) {
-			person.setPolicy(policy);
-			personRepository.save(person);
+		try {
+			policyRepository.save(policy);
+
+			for (Person person : policy.getParties()) {
+				person.setPolicy(policy);
+				personRepository.save(person);
+			}
+			
+			return policy;
+		} catch (DataIntegrityViolationException dive) {
+			throw new DuplicatePolicyExcetion("Duplicate policy: " + policy.getAbsPolicyNumber());
 		}
-		
-		return policy;
 
 	}
 

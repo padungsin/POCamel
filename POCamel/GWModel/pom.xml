@@ -32,6 +32,10 @@
 			<artifactId>javax.persistence-api</artifactId>
 			<version>2.2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.popo</groupId>
+			<artifactId>CISL_RSA</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
