@@ -31,7 +31,7 @@
 		<category>Database</category>
 		<title>Spring Boot REST JPA</title>
 
-		<spring.boot-version>2.1.6.RELEASE</spring.boot-version>
+		<spring.boot-version>2.5.12</spring.boot-version>
 		<!-- Spring Boot default profile in order to use an embedded database -->
 		<run.profiles>dev</run.profiles>
 
